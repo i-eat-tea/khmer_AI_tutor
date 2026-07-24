@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home Tutor - WEG AI Prototype</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Noto+Sans+Khmer:wght@400;500;700&family=Inter:wght@400;500;600&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', 'Noto Sans Khmer', sans-serif;
+    background: #F6F2E9;
+    color: #2E2A24;
+    min-height: 100vh;
+    padding: 24px 16px;
+  }
+
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .brand-mark {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: #2E5C8A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+  }
+
+  .brand-text h1 {
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #2E2A24;
+  }
+
+  .brand-text p {
+    font-size: 12px;
+    color: #8A8375;
+  }
+
+  .badge {
+    font-size: 11px;
+    padding: 5px 10px;
+    background: #E4DECC;
+    color: #6B6350;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+
+  .card {
+    background: #FFFDF8;
+    border: 1px solid #E4DECC;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+
+  .steps-rail {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 18px;
+  }
+
+  .rung {
+    flex: 1;
+    height: 6px;
+    border-radius: 4px;
+    background: #E4DECC;
+    transition: background 0.3s ease;
+  }
+
+  .rung.done {
+    background: #2E5C8A;
+  }
+
+  .rung.active {
+    background: #D8763F;
+  }
+
+  #chat {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-height: 420px;
+    overflow-y: auto;
+    padding-right: 4px;
+    margin-bottom: 16px;
+  }
+
+  .msg {
+    max-width: 85%;
+    padding: 12px 14px;
+    border-radius: 14px;
+    font-size: 15px;
+    line-height: 1.6;
+    font-family: 'Noto Sans Khmer', 'Inter', sans-serif;
+    white-space: pre-wrap;
+  }
+
+  .msg.tutor {
+    background: #EAF1F7;
+    color: #1F3B54;
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+  }
+
+  .msg.student {
+    background: #2E5C8A;
+    color: #fff;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+  }
+
+  .msg.system {
+    background: transparent;
+    color: #A69B84;
+    font-size: 12px;
+    align-self: center;
+    text-align: center;
+  }
+
+  .typing {
+    display: flex;
+    gap: 4px;
+    padding: 12px 14px;
+    background: #EAF1F7;
+    border-radius: 14px;
+    width: fit-content;
+    align-self: flex-start;
+  }
+
+  .typing span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #7A9BB8;
+    animation: bounce 1.2s infinite;
+  }
+
+  .typing span:nth-child(2) { animation-delay: 0.15s; }
+  .typing span:nth-child(3) { animation-delay: 0.3s; }
+
+  @keyframes bounce {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+    30% { transform: translateY(-4px); opacity: 1; }
+  }
+
+  .hint-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+
+  .hint-btn {
+    font-size: 12px;
+    padding: 7px 12px;
+    border-radius: 20px;
+    border: 1px solid #D8763F;
+    background: #FBEFE5;
+    color: #A34E1D;
+    cursor: pointer;
+    font-weight: 500;
+  }
+
+  .hint-btn:hover { background: #F5DEC7; }
+
+  .input-row {
+    display: flex;
+    gap: 8px;
+  }
+
+  #userInput {
+    flex: 1;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid #E4DECC;
+    font-size: 15px;
+    font-family: 'Noto Sans Khmer', 'Inter', sans-serif;
+    background: #fff;
+  }
+
+  #userInput:focus {
+    outline: none;
+    border-color: #2E5C8A;
+  }
+
+  .send-btn {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    border: none;
+    background: #2E5C8A;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .send-btn:hover { background: #244968; }
+  .send-btn:disabled { background: #B9C6D3; cursor: not-allowed; }
+
+  .footnote {
+    font-size: 12px;
+    color: #A69B84;
+    text-align: center;
+    margin-top: 14px;
+    line-height: 1.6;
+  }
+
+  .sample-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+
+  .sample-chip {
+    font-size: 12px;
+    padding: 7px 12px;
+    border-radius: 20px;
+    border: 1px solid #E4DECC;
+    background: #fff;
+    color: #6B6350;
+    cursor: pointer;
+  }
+
+  .sample-chip:hover { border-color: #2E5C8A; color: #2E5C8A; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="brand">
+      <div class="brand-mark">tu</div>
+      <div class="brand-text">
+        <h1>Home Tutor</h1>
+        <p>WEG prototype — guided AI tutor</p>
+      </div>
+    </div>
+    <div class="badge">Demo build</div>
+  </div>
+
+  <div class="card">
+    <div class="steps-rail" id="stepsRail"></div>
+
+    <div id="chat"></div>
+
+    <div class="hint-row" id="hintRow" style="display:none;">
+      <button class="hint-btn" onclick="requestHint('nudge')">Give me a nudge</button>
+      <button class="hint-btn" onclick="requestHint('partial')">Give a bigger hint</button>
+      <button class="hint-btn" onclick="requestHint('full')">Just explain this step</button>
+    </div>
+
+    <div class="input-row">
+      <input type="text" id="userInput" placeholder="Type your homework question or answer attempt in Khmer or English..." />
+      <button class="send-btn" id="sendBtn" onclick="handleSend()">&#8594;</button>
+    </div>
+
+    <div class="sample-row">
+      <div class="sample-chip" onclick="fillSample('If a rectangle has length 8cm and width 5cm, what is its area?')">Try: rectangle area problem</div>
+      <div class="sample-chip" onclick="fillSample('What is photosynthesis?')">Try: photosynthesis question</div>
+    </div>
+  </div>
+
+  <p class="footnote">
+    This prototype shows the core teaching loop only: guided, step-by-step explanation in Khmer, never answer-dumping.<br>
+    Voice input/output, teacher dashboard, and curriculum-grounding are planned for the full build (see backend scaffold).
+  </p>
+
+</div>
+
+<script>
+let conversationHistory = [];
+let stepCount = 0;
+let awaitingAttempt = false;
+
+function renderSteps() {
+  const rail = document.getElementById('stepsRail');
+  rail.innerHTML = '';
+  const total = Math.max(stepCount, 3);
+  for (let i = 0; i < total; i++) {
+    const rung = document.createElement('div');
+    rung.className = 'rung';
+    if (i < stepCount - 1) rung.classList.add('done');
+    else if (i === stepCount - 1) rung.classList.add('active');
+    rail.appendChild(rung);
+  }
+}
+
+function addMessage(text, sender) {
+  const chat = document.getElementById('chat');
+  const msg = document.createElement('div');
+  msg.className = 'msg ' + sender;
+  msg.textContent = text;
+  chat.appendChild(msg);
+  chat.scrollTop = chat.scrollHeight;
+  return msg;
+}
+
+function showTyping() {
+  const chat = document.getElementById('chat');
+  const typing = document.createElement('div');
+  typing.className = 'typing';
+  typing.id = 'typingIndicator';
+  typing.innerHTML = '<span></span><span></span><span></span>';
+  chat.appendChild(typing);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function hideTyping() {
+  const el = document.getElementById('typingIndicator');
+  if (el) el.remove();
+}
+
+function fillSample(text) {
+  document.getElementById('userInput').value = text;
+}
+
+const SYSTEM_PROMPT = `You are a friendly, patient Cambodian home tutor for students grades 1-12, speaking to them in Khmer.
+
+RULES YOU MUST FOLLOW STRICTLY:
+1. The student will give you an English math or science homework question, OR respond to your previous step.
+2. NEVER give the final answer immediately. Break the problem into small steps.
+3. For each step, explain the concept briefly in Khmer, then ASK the student to try that step themselves before moving on (e.g. "តើអ្នកគិតថាយើងគួរធ្វើអ្វីបន្ទាប់?").
+4. Keep each response SHORT (2-4 sentences), like a real spoken tutoring turn, not a wall of text.
+5. Respond ONLY in Khmer script, except for necessary math symbols, numbers, or English technical terms that don't translate well.
+6. Be warm and encouraging, like a kind older sibling helping with homework, not a formal textbook.
+7. If the student seems to ask for a hint, give a small nudge, not the full answer, unless they explicitly say they want the full explanation for that step.
+8. If this is the very first message and it's a new homework question, briefly restate the problem in Khmer, then ask a guiding first question rather than starting to solve it yourself.
+
+Keep track of the conversation naturally like a real tutoring session.`;
+
+async function callTutor(userMessage) {
+  conversationHistory.push({ role: "user", content: userMessage });
+
+  const response = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      model: "claude-sonnet-4-6",
+      max_tokens: 1000,
+      system: SYSTEM_PROMPT,
+      messages: conversationHistory
+    })
+  });
+
+  const data = await response.json();
+  const textBlock = data.content.find(b => b.type === "text");
+  const reply = textBlock ? textBlock.text : "សូមអភ័យទោស មានបញ្ហាបច្ចេកទេស សូមសាកល្បងម្តងទៀត។";
+
+  conversationHistory.push({ role: "assistant", content: reply });
+  return reply;
+}
+
+async function handleSend() {
+  const input = document.getElementById('userInput');
+  const text = input.value.trim();
+  if (!text) return;
+
+  const sendBtn = document.getElementById('sendBtn');
+  sendBtn.disabled = true;
+  input.value = '';
+
+  addMessage(text, 'student');
+  stepCount++;
+  renderSteps();
+  showTyping();
+
+  try {
+    const reply = await callTutor(text);
+    hideTyping();
+    addMessage(reply, 'tutor');
+    document.getElementById('hintRow').style.display = 'flex';
+  } catch (err) {
+    hideTyping();
+    addMessage('Connection error. Please try again.', 'system');
+  }
+
+  sendBtn.disabled = false;
+  input.focus();
+}
+
+async function requestHint(level) {
+  const hintMap = {
+    nudge: "I'm still stuck, can you give me a small nudge? (please answer in Khmer as usual)",
+    partial: "I need a bigger hint please. (please answer in Khmer as usual)",
+    full: "Please just explain this step fully. (please answer in Khmer as usual)"
+  };
+  const sendBtn = document.getElementById('sendBtn');
+  sendBtn.disabled = true;
+  addMessage(level === 'nudge' ? 'ខ្ញុំសុំគំនិតតូចមួយ' : level === 'partial' ? 'ខ្ញុំសុំគំនិតធំជាងនេះ' : 'ពន្យល់ជំហាននេះឲ្យខ្ញុំបានទេ', 'student');
+  showTyping();
+  try {
+    const reply = await callTutor(hintMap[level]);
+    hideTyping();
+    addMessage(reply, 'tutor');
+  } catch (err) {
+    hideTyping();
+    addMessage('Connection error. Please try again.', 'system');
+  }
+  sendBtn.disabled = false;
+}
+
+document.getElementById('userInput').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') handleSend();
+});
+
+renderSteps();
+addMessage('សួស្តី! ខ្ញុំជាគ្រូបង្រៀនផ្ទាល់ខ្លួនរបស់អ្នក។ សរសេរសំណួរកិច្ចការផ្ទះរបស់អ្នកជាភាសាអង់គ្លេស ខ្ញុំនឹងជួយពន្យល់ជាភាសាខ្មែរ ជំហានម្តងមួយៗ!', 'tutor');
+</script>
+</body>
+</html>
