@@ -1,7 +1,7 @@
-const OpenAI = require('openai');
+const { GoogleGenerativeAI } = require('@google/generative-ai');
 const { getCurriculumContext } = require('./curriculum');
 
-const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 // In-memory conversation store for the prototype.
 // Replace with a database table (see /database/schema.sql) for production.
@@ -25,7 +25,7 @@ RULES YOU MUST FOLLOW STRICTLY:
  */
 async function getTutorReply({ studentText, conversationId, studentId }) {
   if (!conversations[conversationId]) {
-    conversations[conversationId] = { messages: [], stepNumber: 0 };
+    conversations[conversationId] = { history: [], stepNumber: 0 };
   }
   const convo = conversations[conversationId];
 
@@ -34,17 +34,18 @@ async function getTutorReply({ studentText, conversationId, studentId }) {
     ? `${SYSTEM_PROMPT}\n\nCURRICULUM REFERENCE (internal use only, never quote directly):\n${curriculumContext}`
     : SYSTEM_PROMPT;
 
-  convo.messages.push({ role: 'user', content: studentText });
-  convo.stepNumber += 1;
-
-  const response = await client.chat.completions.create({
-    model: 'gpt-4o',
-    messages: [{ role: 'system', content: systemPrompt }, ...convo.messages],
-    max_tokens: 300
+  const model = genAI.getGenerativeModel({
+    model: 'gemini-flash-latest',
+    systemInstruction: systemPrompt,
   });
 
-  const replyText = response.choices[0].message.content;
-  convo.messages.push({ role: 'assistant', content: replyText });
+  const chat = model.startChat({ history: convo.history });
+  const result = await chat.sendMessage(studentText);
+  const replyText = result.response.text();
+
+  convo.stepNumber += 1;
+  convo.history.push({ role: 'user', parts: [{ text: studentText }] });
+  convo.history.push({ role: 'model', parts: [{ text: replyText }] });
 
   return { text: replyText, stepNumber: convo.stepNumber };
 }

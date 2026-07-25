@@ -17,27 +17,31 @@ to any credentials.
 - `database/schema.sql` — tables for users, classes, curriculum docs, and
   a full question log for the teacher dashboard.
 
-## What you need to plug in
+## Speech (ASR + TTS)
 
-Two things are placeholders because they need real API keys/accounts:
+Both `server/services/asr.js` and `server/services/tts.js` use **Google
+Cloud Speech-to-Text / Text-to-Speech**, since both support Khmer
+(`km-KH`) and don't require a Chinese phone number to sign up (unlike
+ByteDance's Volcengine platform, which was ruled out for that reason).
 
-1. **`server/services/asr.js`** — speech-to-text. Use either:
-   - The ByteDance ASR you already used in KIDO, or
-   - Google Cloud Speech-to-Text with `languageCode: 'km-KH'`
+Auth for local development uses your own Google login, no key file
+needed:
 
-2. **`server/services/tts.js`** — text-to-speech. Use either:
-   - OpenAI TTS (you've used this before), or
-   - Google Cloud Text-to-Speech (Khmer voice support)
+```bash
+gcloud auth application-default login
+```
 
-Both files have commented-out example code showing exactly where to put
-your API calls.
+If you later deploy this to a real server (not your own laptop), switch
+to a service account instead — see Google's docs on Application Default
+Credentials for the production setup.
 
 ## Running it
 
 ```bash
 cd server
-cp .env.example .env    # then fill in your real API keys
+cp .env.example .env    # then fill in your OPENAI_API_KEY
 npm install
+gcloud auth application-default login   # one-time, for Google Cloud auth
 npm run dev
 ```
 
