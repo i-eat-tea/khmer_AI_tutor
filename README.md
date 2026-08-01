@@ -53,6 +53,18 @@ curl -X POST http://localhost:3000/api/ask \
   -d '{"text": "What is the area of a rectangle with length 8 and width 5?", "conversationId": "test1", "studentId": "stu_001"}'
 ```
 
+This returns the tutor's reply as text only, fast. To get the spoken (Khmer)
+audio for the same reply, send the text to the separate TTS endpoint:
+
+```bash
+curl -X POST http://localhost:3000/api/tts \
+  -H "Content-Type: application/json" \
+  -d '{"text": "សួស្តី! តើផ្ទៃក្រឡាស្មើប៉ុន្មាន?"}'
+```
+
+(The frontend pages call these two endpoints in sequence so the text appears
+immediately while the audio renders.)
+
 ## Suggested build order for the hackathon
 
 1. Get `/api/ask` working with `text` input only (skip audio) — proves the

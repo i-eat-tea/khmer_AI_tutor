@@ -11,8 +11,8 @@
 
   body {
     font-family: 'Inter', 'Noto Sans Khmer', sans-serif;
-    background: #F6F2E9;
-    color: #2E2A24;
+    background: #F0F6EE;
+    color: #2B3D2E;
     min-height: 100vh;
     padding: 24px 16px;
   }
@@ -30,12 +30,12 @@
 
   .brand-mark {
     width: 38px; height: 38px; border-radius: 10px;
-    background: #2E5C8A; display: flex; align-items: center; justify-content: center;
+    background: #2F7D4F; display: flex; align-items: center; justify-content: center;
     color: #fff; font-family: 'Baloo 2', sans-serif; font-weight: 700; font-size: 18px;
   }
 
   .brand-text h1 { font-family: 'Baloo 2', sans-serif; font-size: 18px; font-weight: 700; }
-  .brand-text p { font-size: 12px; color: #8A8375; }
+  .brand-text p { font-size: 12px; color: #71886F; }
 
   .status-row {
     display: flex; align-items: center; gap: 8px;
@@ -53,16 +53,16 @@
 
   .server-config {
     display: flex; gap: 8px; align-items: center;
-    margin-bottom: 14px; font-size: 12px; color: #8A8375;
+    margin-bottom: 14px; font-size: 12px; color: #71886F;
   }
 
   .server-config input {
-    flex: 1; padding: 6px 10px; border-radius: 8px; border: 1px solid #E4DECC;
+    flex: 1; padding: 6px 10px; border-radius: 8px; border: 1px solid #DCE7D7;
     font-size: 12px; font-family: monospace; background: #fff;
   }
 
   .card {
-    background: #FFFDF8; border: 1px solid #E4DECC; border-radius: 16px; padding: 20px;
+    background: #FCFEF9; border: 1px solid #DCE7D7; border-radius: 16px; padding: 20px;
   }
 
   #chat {
@@ -75,19 +75,19 @@
     line-height: 1.6; font-family: 'Noto Sans Khmer', 'Inter', sans-serif; white-space: pre-wrap;
   }
 
-  .msg.tutor { background: #EAF1F7; color: #1F3B54; align-self: flex-start; border-bottom-left-radius: 4px; }
-  .msg.student { background: #2E5C8A; color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
-  .msg.system { background: transparent; color: #A69B84; font-size: 12px; align-self: center; text-align: center; max-width: 100%; }
+  .msg.tutor { background: #E7F4E7; color: #1F4A2C; align-self: flex-start; border-bottom-left-radius: 4px; }
+  .msg.student { background: #2F7D4F; color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+  .msg.system { background: transparent; color: #93A58F; font-size: 12px; align-self: center; text-align: center; max-width: 100%; }
 
   .audio-player {
     align-self: flex-start; margin-top: -6px; width: 240px; height: 32px;
   }
 
   .typing {
-    display: flex; gap: 4px; padding: 12px 14px; background: #EAF1F7;
+    display: flex; gap: 4px; padding: 12px 14px; background: #E7F4E7;
     border-radius: 14px; width: fit-content; align-self: flex-start;
   }
-  .typing span { width: 6px; height: 6px; border-radius: 50%; background: #7A9BB8; animation: bounce 1.2s infinite; }
+  .typing span { width: 6px; height: 6px; border-radius: 50%; background: #6FA07F; animation: bounce 1.2s infinite; }
   .typing span:nth-child(2) { animation-delay: 0.15s; }
   .typing span:nth-child(3) { animation-delay: 0.3s; }
   @keyframes bounce { 0%, 60%, 100% { transform: translateY(0); opacity: 0.5; } 30% { transform: translateY(-4px); opacity: 1; } }
@@ -95,33 +95,33 @@
   .input-row { display: flex; gap: 8px; }
 
   #userInput {
-    flex: 1; padding: 12px 14px; border-radius: 12px; border: 1px solid #E4DECC;
+    flex: 1; padding: 12px 14px; border-radius: 12px; border: 1px solid #DCE7D7;
     font-size: 15px; font-family: 'Noto Sans Khmer', 'Inter', sans-serif; background: #fff;
   }
-  #userInput:focus { outline: none; border-color: #2E5C8A; }
+  #userInput:focus { outline: none; border-color: #2F7D4F; }
 
   .icon-btn {
     width: 46px; height: 46px; border-radius: 12px; border: none; color: #fff;
     font-size: 18px; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
   }
 
-  .send-btn { background: #2E5C8A; }
-  .send-btn:hover { background: #244968; }
-  .send-btn:disabled { background: #B9C6D3; cursor: not-allowed; }
+  .send-btn { background: #2F7D4F; }
+  .send-btn:hover { background: #25603E; }
+  .send-btn:disabled { background: #AED1B6; cursor: not-allowed; }
 
-  .mic-btn { background: #D8763F; }
-  .mic-btn:hover { background: #B85F2E; }
+  .mic-btn { background: #3CA55C; }
+  .mic-btn:hover { background: #2F8A4C; }
   .mic-btn.recording { background: #C43D3D; animation: pulse 1.2s infinite; }
   @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
 
-  .footnote { font-size: 12px; color: #A69B84; text-align: center; margin-top: 14px; line-height: 1.6; }
+  .footnote { font-size: 12px; color: #93A58F; text-align: center; margin-top: 14px; line-height: 1.6; }
 
   .sample-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
   .sample-chip {
-    font-size: 12px; padding: 7px 12px; border-radius: 20px; border: 1px solid #E4DECC;
-    background: #fff; color: #6B6350; cursor: pointer;
+    font-size: 12px; padding: 7px 12px; border-radius: 20px; border: 1px solid #DCE7D7;
+    background: #fff; color: #4C6650; cursor: pointer;
   }
-  .sample-chip:hover { border-color: #2E5C8A; color: #2E5C8A; }
+  .sample-chip:hover { border-color: #2F7D4F; color: #2F7D4F; }
 </style>
 </head>
 <body>
@@ -176,6 +176,26 @@ let studentId = 'stu_demo_001';
 let mediaRecorder = null;
 let audioChunks = [];
 let isRecording = false;
+let audioMime = 'audio/webm';
+
+// When served from the backend (http://<lan-ip>:3000/live), default to the
+// same host so it works from a phone without editing the URL. When opened as
+// a local file, fall back to localhost.
+(function initServerUrl() {
+  const input = document.getElementById('serverUrl');
+  if (location.protocol === 'http:' || location.protocol === 'https:') {
+    input.value = location.origin;
+  }
+})();
+
+function recorderMime() {
+  if (MediaRecorder.isTypeSupported('audio/webm;codecs=opus')) return 'audio/webm;codecs=opus';
+  if (MediaRecorder.isTypeSupported('audio/mp4')) return 'audio/mp4';
+  return 'audio/webm';
+}
+function encodingFor(mime) {
+  return (mime || '').indexOf('mp4') !== -1 ? 'MP4' : 'WEBM_OPUS';
+}
 
 function getServerUrl() {
   return document.getElementById('serverUrl').value.replace(/\/$/, '');
@@ -251,6 +271,30 @@ async function sendToBackend(payload) {
   return data;
 }
 
+async function fetchAudio(text) {
+  const response = await fetch(getServerUrl() + '/api/tts', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text })
+  });
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.error || 'Audio failed');
+  }
+  return data.audioReplyBase64;
+}
+
+async function attachAudio(text) {
+  const hint = addMessage('🔊 Preparing audio…', 'system');
+  try {
+    const b64 = await fetchAudio(text);
+    hint.remove();
+    addAudioPlayer(b64);
+  } catch (err) {
+    hint.textContent = 'Audio unavailable.';
+  }
+}
+
 async function handleSend() {
   const input = document.getElementById('userInput');
   const text = input.value.trim();
@@ -267,9 +311,7 @@ async function handleSend() {
     const data = await sendToBackend({ text, conversationId, studentId });
     hideTyping();
     addMessage(data.tutorText, 'tutor');
-    if (data.audioReplyBase64) {
-      addAudioPlayer(data.audioReplyBase64);
-    }
+    attachAudio(data.tutorText);
   } catch (err) {
     hideTyping();
     addMessage('Error: ' + err.message, 'system');
@@ -285,7 +327,8 @@ async function toggleRecording() {
   if (!isRecording) {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/webm;codecs=opus' });
+      audioMime = recorderMime();
+      mediaRecorder = new MediaRecorder(stream, audioMime ? { mimeType: audioMime } : undefined);
       audioChunks = [];
 
       mediaRecorder.ondataavailable = (e) => audioChunks.push(e.data);
@@ -305,7 +348,7 @@ async function toggleRecording() {
 }
 
 async function handleRecordingStop() {
-  const blob = new Blob(audioChunks, { type: 'audio/webm' });
+  const blob = new Blob(audioChunks, { type: audioMime });
   const reader = new FileReader();
 
   reader.onloadend = async () => {
@@ -315,15 +358,18 @@ async function handleRecordingStop() {
     showTyping();
 
     try {
-      const data = await sendToBackend({ audioBase64: base64Audio, conversationId, studentId });
+      const data = await sendToBackend({
+        audioBase64: base64Audio,
+        encoding: encodingFor(audioMime),
+        conversationId,
+        studentId
+      });
       hideTyping();
       if (data.studentText) {
         addMessage('Heard: "' + data.studentText + '"', 'system');
       }
       addMessage(data.tutorText, 'tutor');
-      if (data.audioReplyBase64) {
-        addAudioPlayer(data.audioReplyBase64);
-      }
+      attachAudio(data.tutorText);
     } catch (err) {
       hideTyping();
       addMessage('Error: ' + err.message, 'system');

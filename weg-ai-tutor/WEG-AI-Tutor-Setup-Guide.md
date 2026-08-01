@@ -170,9 +170,10 @@ Should show `{"status":"ok"}`.
 curl -X POST http://localhost:3000/api/ask -H "Content-Type: application/json" -d "{\"text\": \"What is the area of a rectangle with length 8 and width 5?\", \"conversationId\": \"test1\", \"studentId\": \"stu_001\"}"
 ```
 
-If it works, you'll get back a large JSON response including a Khmer
-explanation and a long base64 audio string (that's expected — it's the
-spoken reply, just not human-readable as text).
+If it works, you'll get back a JSON response including a Khmer explanation
+(plain text, no markdown symbols). Audio is now generated separately — call
+`POST /api/tts` with `{"text": "<the reply>"}` to get the spoken version as a
+base64 MP3 string.
 
 ---
 
